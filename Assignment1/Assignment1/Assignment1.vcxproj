@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cards.cpp" />
+    <ClCompile Include="siete_y_medio.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cards.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{202EAF7E-E8B4-44C1-B56B-C5E801BD644F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -141,8 +148,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
