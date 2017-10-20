@@ -113,16 +113,16 @@ string Card::get_english_suit() const {
   string suitName;
   switch (suit) {
      case OROS:
-        suitName = "gold";
+        suitName = "coin";
   break;
      case COPAS:
         suitName = "trophy";
   break;
      case ESPADAS:
-        suitName = "matador";
+        suitName = "sword";
   break;
      case BASTOS:
-        suitName = "bullet";
+        suitName = "mace";
   break;
      default: break;
   }
@@ -157,12 +157,12 @@ string Card::get_english_rank() const {
         rankName = "Seven";
   break;
      case SOTA:
-        rankName = "Jack";
+        rankName = "Soldier";
   break;
      case CABALLO:
-        rankName = "Queen";
+        rankName = "Knight";
   break;
-     case REY:
+     case REY:Queen
         rankName = "King";
   break;
      default: break;
