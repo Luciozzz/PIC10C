@@ -157,7 +157,7 @@ string Card::get_english_rank() const {
         rankName = "Seven";
   break;
      case SOTA:
-        rankName = "Soldier";
+        rankName = "Jack";
   break;
      case CABALLO:
         rankName = "Knight";
