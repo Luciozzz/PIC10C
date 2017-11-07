@@ -120,7 +120,7 @@ string Card::get_english_suit() const {
   break;
      case ESPADAS:
         suitName = "sword";
-  break;
+  break;  
      case BASTOS:
         suitName = "mace";
   break;
@@ -162,7 +162,7 @@ string Card::get_english_rank() const {
      case CABALLO:
         rankName = "Knight";
   break;
-     case REY:Queen
+     case REY:
         rankName = "King";
   break;
      default: break;
@@ -188,10 +188,26 @@ bool Card::operator < (Card card2) const {
    Hand class
    ************************************************* */
 // Implemente the member functions of the Hand class here.
+void Hand::add_to_pile(){
+    this->v.push_back(Card());
+};
 
+void Hand::update_value(){
+    for(auto x : v){
+        if(x.get_rank()<=7)
+            value += x.get_rank();
+        else
+            value += 0.5;
+    }
+};
 
+double Hand::get_value(){
+    return value;
+};
 
 /* *************************************************
    Player class
    ************************************************* */
 // Implemente the member functions of the Player class here.
+Player::Player(int m) : money(m){};
+

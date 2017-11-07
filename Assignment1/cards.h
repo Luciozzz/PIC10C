@@ -64,10 +64,14 @@ class Hand {
       Hand();
 
       // You decide what functions you'll need...
+      void add_to_pile();
+      void update_value();
+      double get_value();
 
    private:
       // You decide what fields you'll need...
       vector<Card> v;
+      double value;
 };
 
 
@@ -78,10 +82,12 @@ class Player {
       Player(int m);
 
       // You decide what functions you'll need...
-
+      void win();
+      void lose();
    private:
       int money;
       // You decide what extra fields (if any) you'll need...
+      Hand hand;
 };
 
 #endif

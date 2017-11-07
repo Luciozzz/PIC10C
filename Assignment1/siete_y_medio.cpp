@@ -19,5 +19,6 @@ using namespace std;
 // Stub for main
 int main(){
    /* --STATEMENTS-- */
+   cout << "main is executing..." << endl;;
    return 0;
 }
