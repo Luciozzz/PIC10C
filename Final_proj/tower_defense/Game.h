@@ -14,13 +14,12 @@ public:
 
     void mousePressEvent(QMouseEvent* event);
     void keyPressEvent(QKeyEvent *key);
-    QPointF getTowerLocation();
 
     QGraphicsScene* scene;
     Tower* t;
     QPoint* center;
     bool start = false;
-
+//    void delay( int seconds );
 };
 
 #endif // GAME_H

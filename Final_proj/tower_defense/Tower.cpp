@@ -1,8 +1,11 @@
 #include "Tower.h"
+#include "Enemy.h"
 #include <QPixmap>
 #include <QVector>
 #include <QPointF>
 #include <QPolygonF>
+#include <QTimer>
+#include <QMessageBox>
 
 Tower::Tower(QGraphicsItem* parent){
     setPixmap(QPixmap(":/images/tower.png"));
@@ -27,8 +30,30 @@ Tower::Tower(QGraphicsItem* parent){
     QPointF tower_center(x()+38, y()+38);
     QLineF line(polygon_center, tower_center);
     hit_area->setPos(x()+line.dx(), y()+line.dy());
+
+    QTimer* check_timer = new QTimer(this);
+    connect(check_timer, SIGNAL(timeout()), this, SLOT(check_if_hit()));
+    check_timer->start(20);
 }
+
 
 void Tower::rotate(const QPointF& mouse){
     return;
+}
+
+void Tower::check_if_hit(){
+    QList<QGraphicsItem*> colliding_items = hit_area->collidingItems();
+
+    if(colliding_items.size() == 1){
+        got_hit = false;
+        return;
+    }
+
+    for(size_t i = 0, n = colliding_items.size(); i < n; i++){
+        Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
+        if(enemy){
+            got_hit = true;
+            //delete this;
+        }
+    }
 }

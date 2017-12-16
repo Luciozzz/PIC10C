@@ -11,11 +11,14 @@ class Enemy: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Enemy(QGraphicsItem* parent = 0);
-    void setSpeed(int s);
+    void setSpeed(double s);
+    bool got_hit;
 public slots:
     void move_forward();
+    void check_if_hit();
 private:
-    int speed = 5;
+    double speed = 0.8;
+    QGraphicsPolygonItem* hit_area;
 };
 
 #endif // ENEMY_H

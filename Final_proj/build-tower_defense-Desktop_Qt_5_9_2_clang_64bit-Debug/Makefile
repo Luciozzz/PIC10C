@@ -55,6 +55,7 @@ SOURCES       = ../tower_defense/main.cpp \
 		../tower_defense/Game.cpp \
 		../tower_defense/Bullet.cpp \
 		../tower_defense/Enemy.cpp qrc_res.cpp \
+		moc_Tower.cpp \
 		moc_Bullet.cpp \
 		moc_Enemy.cpp
 OBJECTS       = main.o \
@@ -63,6 +64,7 @@ OBJECTS       = main.o \
 		Bullet.o \
 		Enemy.o \
 		qrc_res.o \
+		moc_Tower.o \
 		moc_Bullet.o \
 		moc_Enemy.o
 DIST          = /Applications/Qt/5.9.2/clang_64/mkspecs/features/spec_pre.prf \
@@ -653,9 +655,18 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Applications/Qt/5.9.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.10 -Wall -W -dM -E -o moc_predefs.h /Applications/Qt/5.9.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Bullet.cpp moc_Enemy.cpp
+compiler_moc_header_make_all: moc_Tower.cpp moc_Bullet.cpp moc_Enemy.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Bullet.cpp moc_Enemy.cpp
+	-$(DEL_FILE) moc_Tower.cpp moc_Bullet.cpp moc_Enemy.cpp
+moc_Tower.cpp: /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../tower_defense/Tower.h \
+		moc_predefs.h \
+		/Applications/Qt/5.9.2/clang_64/bin/moc
+	/Applications/Qt/5.9.2/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Applications/Qt/5.9.2/clang_64/mkspecs/macx-clang -I/Users/Duanhao/Code/PIC10C/Final_proj/tower_defense -I/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Applications/Qt/5.9.2/clang_64/lib ../tower_defense/Tower.h -o moc_Tower.cpp
+
 moc_Bullet.cpp: /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
@@ -724,14 +735,21 @@ Tower.o: ../tower_defense/Tower.cpp ../tower_defense/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../tower_defense/Enemy.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qvector.h \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QPolygonF \
-		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpolygon.h
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpolygon.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QTimer \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Tower.o ../tower_defense/Tower.cpp
 
 Game.o: ../tower_defense/Game.cpp ../tower_defense/Game.h \
@@ -791,6 +809,7 @@ Enemy.o: ../tower_defense/Enemy.cpp ../tower_defense/Enemy.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../tower_defense/Bullet.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QTimer \
@@ -801,6 +820,9 @@ Enemy.o: ../tower_defense/Enemy.cpp ../tower_defense/Enemy.h \
 
 qrc_res.o: qrc_res.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_res.o qrc_res.cpp
+
+moc_Tower.o: moc_Tower.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Tower.o moc_Tower.cpp
 
 moc_Bullet.o: moc_Bullet.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Bullet.o moc_Bullet.cpp

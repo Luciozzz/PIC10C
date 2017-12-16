@@ -10,6 +10,8 @@
 #include "Enemy.h"
 #include "Tower.h"
 #include <algorithm>
+#include <QTime>
+#include <QCoreApplication>
 
 Game::Game(){
     scene = new QGraphicsScene(this);
@@ -22,7 +24,7 @@ Game::Game(){
 
     //create a tower:
     t = new Tower();
-    center = new QPoint(365, 369);
+    center = new QPoint(365, 600);
     t->setPos(center->x(), center->y());
     scene->addItem(t);
 
@@ -51,16 +53,18 @@ Game::Game(){
     e8->setPos(560,0);
     e9->setPos(640,0);
     e10->setPos(720,0);
-    e1->setSpeed(7);
-    e2->setSpeed(6);
-    e3->setSpeed(5);
-    e4->setSpeed(8);
-    e5->setSpeed(6);
-    e6->setSpeed(9);
-    e7->setSpeed(10);
-    e8->setSpeed(12);
-    e9->setSpeed(9);
-    e10->setSpeed(7);
+
+    //medium difficulty
+    e1->setSpeed(2);
+    e2->setSpeed(1);
+    e3->setSpeed(1.3);
+    e4->setSpeed(1.7);
+    e5->setSpeed(1.6);
+    e6->setSpeed(1.4);
+    e7->setSpeed(0.9);
+    e8->setSpeed(0.8);
+    e9->setSpeed(1.2);
+    e10->setSpeed(1.9);
 
     QList<Enemy*> enemy_list;
     enemy_list << e1 << e2 << e3 << e4 << e5 << e6 << e7 << e8 << e9 << e10;
@@ -84,19 +88,27 @@ Game::Game(){
 }
 
 void Game::mousePressEvent(QMouseEvent *event){
-    //create the bullet
-    Bullet* bullet = new Bullet();
+    if(!(t->got_hit)){
+        //create the bullet
+        Bullet* bullet = new Bullet();
 
-    //set start position to be at the center of tower:
-    bullet->setPos(center->x()+35, center->y()+31);
+        //set start position to be at the center of tower:
+        bullet->setPos(center->x()+35, center->y()+31);
 
-    //set the angle according to the mouse click:
+        //set the angle according to the mouse click:
 
-    QLineF line(QPointF(t->x()+35, t->y()+31),QPointF(event->x(), event->y()));
-    int theta = line.angle()+90;
+        QLineF line(QPointF(t->x()+35, t->y()+31),QPointF(event->x(), event->y()));
+        int theta = line.angle()+90;
 
-    bullet->setRotation(theta);
-    scene->addItem(bullet);
+        bullet->setRotation(theta);
+        scene->addItem(bullet);
+    }else{
+        Bullet* bullet = new Bullet();
+
+        //set start position to be at the center of tower:
+        bullet->setPos(400, 400);
+        scene->addItem(bullet);
+    }
 }
 
 void Game::keyPressEvent(QKeyEvent *key){
@@ -113,10 +125,5 @@ void Game::keyPressEvent(QKeyEvent *key){
         center->setX(center->x()+20);
         t->setPos(center->x(), center->y());
     }
-}
-
-QPointF Game::getTowerLocation()
-{
-    return t->pos();
 }
 

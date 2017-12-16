@@ -12,3 +12,12 @@ All assignments and projects are located in this folder.
 
 ## Final Project Description
 
+__Tower Defense__
+
+This is a tower defense game. Rather than normal tower defense games, this tower is able to move freely according to the user input. 
+
+Some instructions:
+
+- The player should use W, A, S, and D on the keyboard to move the tower up, left, down, and right. 
+- Mouse clicks will fire a bullet from the tower.
+- The goal is to eliminate all enemies that fall from the top of the window without being crashed by them.

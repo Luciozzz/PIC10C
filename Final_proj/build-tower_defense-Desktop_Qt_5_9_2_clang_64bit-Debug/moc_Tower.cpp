@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'Enemy.h'
+** Meta object code from reading C++ file 'Tower.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../tower_defense/Enemy.h"
+#include "../tower_defense/Tower.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'Enemy.h' doesn't include <QObject>."
+#error "The header file 'Tower.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.9.2. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,28 +20,28 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_Enemy_t {
+struct qt_meta_stringdata_Tower_t {
     QByteArrayData data[4];
-    char stringdata0[33];
+    char stringdata0[27];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_Enemy_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Tower_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_Enemy_t qt_meta_stringdata_Enemy = {
+static const qt_meta_stringdata_Tower_t qt_meta_stringdata_Tower = {
     {
-QT_MOC_LITERAL(0, 0, 5), // "Enemy"
-QT_MOC_LITERAL(1, 6, 12), // "move_forward"
-QT_MOC_LITERAL(2, 19, 0), // ""
-QT_MOC_LITERAL(3, 20, 12) // "check_if_hit"
+QT_MOC_LITERAL(0, 0, 5), // "Tower"
+QT_MOC_LITERAL(1, 6, 6), // "rotate"
+QT_MOC_LITERAL(2, 13, 0), // ""
+QT_MOC_LITERAL(3, 14, 12) // "check_if_hit"
 
     },
-    "Enemy\0move_forward\0\0check_if_hit"
+    "Tower\0rotate\0\0check_if_hit"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_Enemy[] = {
+static const uint qt_meta_data_Tower[] = {
 
  // content:
        7,       // revision
@@ -55,52 +55,51 @@ static const uint qt_meta_data_Enemy[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   24,    2, 0x0a /* Public */,
-       3,    0,   25,    2, 0x0a /* Public */,
+       1,    1,   24,    2, 0x0a /* Public */,
+       3,    0,   27,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QPointF,    2,
     QMetaType::Void,
 
        0        // eod
 };
 
-void Enemy::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Tower::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        Enemy *_t = static_cast<Enemy *>(_o);
+        Tower *_t = static_cast<Tower *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->move_forward(); break;
+        case 0: _t->rotate((*reinterpret_cast< const QPointF(*)>(_a[1]))); break;
         case 1: _t->check_if_hit(); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
-const QMetaObject Enemy::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_Enemy.data,
-      qt_meta_data_Enemy,  qt_static_metacall, nullptr, nullptr}
+const QMetaObject Tower::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_Tower.data,
+      qt_meta_data_Tower,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *Enemy::metaObject() const
+const QMetaObject *Tower::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *Enemy::qt_metacast(const char *_clname)
+void *Tower::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_Enemy.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Tower.stringdata0))
         return static_cast<void*>(this);
     if (!strcmp(_clname, "QGraphicsPixmapItem"))
         return static_cast< QGraphicsPixmapItem*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int Enemy::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Tower::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
