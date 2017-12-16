@@ -8,8 +8,10 @@
 class Tower: public QGraphicsPixmapItem{
 public:
     Tower(QGraphicsItem* parent = 0);
+public slots:
+    void rotate(const QPointF&);
 private:
-    QGraphicsPolygonItem* attack_area;
+    QGraphicsPolygonItem* hit_area;
 };
 
 #endif // TOWER_H

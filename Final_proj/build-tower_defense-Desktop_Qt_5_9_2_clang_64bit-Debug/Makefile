@@ -681,7 +681,13 @@ main.o: ../tower_defense/main.cpp /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
-		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../tower_defense/Tower.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../tower_defense/main.cpp
 
 Tower.o: ../tower_defense/Tower.cpp ../tower_defense/Tower.h \
@@ -704,16 +710,19 @@ Game.o: ../tower_defense/Game.cpp ../tower_defense/Game.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
-		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
 		../tower_defense/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../tower_defense/Bullet.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QtMath \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Game.o ../tower_defense/Game.cpp
 
 Bullet.o: ../tower_defense/Bullet.cpp ../tower_defense/Bullet.h \
@@ -726,6 +735,7 @@ Bullet.o: ../tower_defense/Bullet.cpp ../tower_defense/Bullet.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QTimer \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QtMath \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Bullet.o ../tower_defense/Bullet.cpp
 

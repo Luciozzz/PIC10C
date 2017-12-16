@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include <QPixmap>
 #include <QTimer>
-#include "qmath.h"
+#include <QtMath>
 
 Bullet::Bullet(QGraphicsItem *parent){
     setPixmap(QPixmap(":/images/bullet.png"));
