@@ -11,7 +11,7 @@ Tower::Tower(QGraphicsItem* parent){
     QVector<QPointF> points;
     points << QPointF(1,0) << QPointF(3,0) << QPointF(4,1.732)
            << QPointF(3,3.464) << QPointF(1,3.464) << QPointF(0,1.732);
-    const int SCALE = 19.95;
+    const int SCALE = 13;
     for(size_t i = 0, n = points.size(); i < n; i++){
         points[i] *= SCALE;
     }
@@ -21,7 +21,7 @@ Tower::Tower(QGraphicsItem* parent){
     hit_area = new QGraphicsPolygonItem(polygon, this);
 
     //re-center:
-    QPointF polygon_center(1.92,1.55);
+    QPointF polygon_center(2.2,2.2);
     polygon_center *= SCALE;
     polygon_center = mapToScene(polygon_center);
     QPointF tower_center(x()+38, y()+38);

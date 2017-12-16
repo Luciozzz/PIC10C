@@ -53,14 +53,18 @@ OBJECTS_DIR   = ./
 SOURCES       = ../tower_defense/main.cpp \
 		../tower_defense/Tower.cpp \
 		../tower_defense/Game.cpp \
-		../tower_defense/Bullet.cpp qrc_res.cpp \
-		moc_Bullet.cpp
+		../tower_defense/Bullet.cpp \
+		../tower_defense/Enemy.cpp qrc_res.cpp \
+		moc_Bullet.cpp \
+		moc_Enemy.cpp
 OBJECTS       = main.o \
 		Tower.o \
 		Game.o \
 		Bullet.o \
+		Enemy.o \
 		qrc_res.o \
-		moc_Bullet.o
+		moc_Bullet.o \
+		moc_Enemy.o
 DIST          = /Applications/Qt/5.9.2/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/Qt/5.9.2/clang_64/mkspecs/qdevice.pri \
 		/Applications/Qt/5.9.2/clang_64/mkspecs/features/device_config.prf \
@@ -223,10 +227,12 @@ DIST          = /Applications/Qt/5.9.2/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/Qt/5.9.2/clang_64/mkspecs/features/lex.prf \
 		../tower_defense/tower_defense.pro ../tower_defense/Tower.h \
 		../tower_defense/Game.h \
-		../tower_defense/Bullet.h ../tower_defense/main.cpp \
+		../tower_defense/Bullet.h \
+		../tower_defense/Enemy.h ../tower_defense/main.cpp \
 		../tower_defense/Tower.cpp \
 		../tower_defense/Game.cpp \
-		../tower_defense/Bullet.cpp
+		../tower_defense/Bullet.cpp \
+		../tower_defense/Enemy.cpp
 QMAKE_TARGET  = tower_defense
 DESTDIR       = 
 TARGET        = tower_defense.app/Contents/MacOS/tower_defense
@@ -606,8 +612,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../tower_defense/res.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Applications/Qt/5.9.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../tower_defense/Tower.h ../tower_defense/Game.h ../tower_defense/Bullet.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../tower_defense/main.cpp ../tower_defense/Tower.cpp ../tower_defense/Game.cpp ../tower_defense/Bullet.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../tower_defense/Tower.h ../tower_defense/Game.h ../tower_defense/Bullet.h ../tower_defense/Enemy.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../tower_defense/main.cpp ../tower_defense/Tower.cpp ../tower_defense/Game.cpp ../tower_defense/Bullet.cpp ../tower_defense/Enemy.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -636,6 +642,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_res.cpp
 qrc_res.cpp: ../tower_defense/res.qrc \
 		/Applications/Qt/5.9.2/clang_64/bin/rcc \
+		../tower_defense/enemy1.png \
 		../tower_defense/tower.png \
 		../tower_defense/bullet.png
 	/Applications/Qt/5.9.2/clang_64/bin/rcc -name res ../tower_defense/res.qrc -o qrc_res.cpp
@@ -646,9 +653,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Applications/Qt/5.9.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.10 -Wall -W -dM -E -o moc_predefs.h /Applications/Qt/5.9.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Bullet.cpp
+compiler_moc_header_make_all: moc_Bullet.cpp moc_Enemy.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Bullet.cpp
+	-$(DEL_FILE) moc_Bullet.cpp moc_Enemy.cpp
 moc_Bullet.cpp: /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
@@ -658,6 +665,22 @@ moc_Bullet.cpp: /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/
 		moc_predefs.h \
 		/Applications/Qt/5.9.2/clang_64/bin/moc
 	/Applications/Qt/5.9.2/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Applications/Qt/5.9.2/clang_64/mkspecs/macx-clang -I/Users/Duanhao/Code/PIC10C/Final_proj/tower_defense -I/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Applications/Qt/5.9.2/clang_64/lib ../tower_defense/Bullet.h -o moc_Bullet.cpp
+
+moc_Enemy.cpp: /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../tower_defense/Tower.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../tower_defense/Enemy.h \
+		moc_predefs.h \
+		/Applications/Qt/5.9.2/clang_64/bin/moc
+	/Applications/Qt/5.9.2/clang_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/Applications/Qt/5.9.2/clang_64/mkspecs/macx-clang -I/Users/Duanhao/Code/PIC10C/Final_proj/tower_defense -I/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Applications/Qt/5.9.2/clang_64/lib ../tower_defense/Enemy.h -o moc_Enemy.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -687,7 +710,13 @@ main.o: ../tower_defense/main.cpp /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
-		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../tower_defense/Enemy.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../tower_defense/main.cpp
 
 Tower.o: ../tower_defense/Tower.cpp ../tower_defense/Tower.h \
@@ -716,13 +745,19 @@ Game.o: ../tower_defense/Game.cpp ../tower_defense/Game.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../tower_defense/Enemy.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../tower_defense/Bullet.h \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QtMath \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qmath.h
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Game.o ../tower_defense/Game.cpp
 
 Bullet.o: ../tower_defense/Bullet.cpp ../tower_defense/Bullet.h \
@@ -739,11 +774,39 @@ Bullet.o: ../tower_defense/Bullet.cpp ../tower_defense/Bullet.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Bullet.o ../tower_defense/Bullet.cpp
 
+Enemy.o: ../tower_defense/Enemy.cpp ../tower_defense/Enemy.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../tower_defense/Tower.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		../tower_defense/Game.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QTimer \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QtMath \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qmath.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Enemy.o ../tower_defense/Enemy.cpp
+
 qrc_res.o: qrc_res.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_res.o qrc_res.cpp
 
 moc_Bullet.o: moc_Bullet.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Bullet.o moc_Bullet.cpp
+
+moc_Enemy.o: moc_Enemy.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Enemy.o moc_Enemy.cpp
 
 ####### Install
 
