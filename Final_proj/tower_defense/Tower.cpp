@@ -53,7 +53,8 @@ void Tower::check_if_hit(){
         Enemy* enemy = dynamic_cast<Enemy*>(colliding_items[i]);
         if(enemy){
             got_hit = true;
-            //delete this;
+            delete enemy;
+
         }
     }
 }

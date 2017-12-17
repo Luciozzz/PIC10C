@@ -60,6 +60,7 @@ void Enemy::check_if_hit(){
         Bullet* bullet = dynamic_cast<Bullet*>(colliding_items[i]);
         if(bullet){
             got_hit = true;
+            delete bullet;
             delete this;
         }
     }
