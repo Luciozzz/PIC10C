@@ -40,6 +40,7 @@ void Enemy::setSpeed(double s){
 }
 
 void Enemy::move_forward(){
+
     const double STEP_SIZE = speed;
     double angle = rotation();
     double dx = STEP_SIZE * qSin(qDegreesToRadians(angle));

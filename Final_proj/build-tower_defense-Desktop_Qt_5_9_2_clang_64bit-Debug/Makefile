@@ -15,7 +15,7 @@ CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefau
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.10 -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.10 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../tower_defense -I. -I/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I/Applications/Qt/5.9.2/clang_64/mkspecs/macx-clang -F/Applications/Qt/5.9.2/clang_64/lib
+INCPATH       = -I../tower_defense -I. -I/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers -I/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I/Applications/Qt/5.9.2/clang_64/mkspecs/macx-clang -F/Applications/Qt/5.9.2/clang_64/lib
 QMAKE         = /Applications/Qt/5.9.2/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -248,7 +248,7 @@ EXPORT_ACTIVE_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(ARCHS))
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h $(OBJECTS)  
+$(TARGET):  $(OBJECTS)  
 	@test -d tower_defense.app/Contents/MacOS/ || mkdir -p tower_defense.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -616,7 +616,6 @@ distdir: FORCE
 	$(COPY_FILE) --parents /Applications/Qt/5.9.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../tower_defense/Tower.h ../tower_defense/Game.h ../tower_defense/Bullet.h ../tower_defense/Enemy.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../tower_defense/main.cpp ../tower_defense/Tower.cpp ../tower_defense/Game.cpp ../tower_defense/Bullet.cpp ../tower_defense/Enemy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../tower_defense/mainwindow.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -663,6 +662,8 @@ moc_Tower.cpp: /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/Q
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../tower_defense/Tower.h \
 		moc_predefs.h \
 		/Applications/Qt/5.9.2/clang_64/bin/moc
@@ -696,13 +697,8 @@ moc_Enemy.cpp: /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/Q
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all:
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
-ui_mainwindow.h: ../tower_defense/mainwindow.ui \
-		/Applications/Qt/5.9.2/clang_64/bin/uic
-	/Applications/Qt/5.9.2/clang_64/bin/uic ../tower_defense/mainwindow.ui -o ui_mainwindow.h
-
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
 compiler_yacc_decl_make_all:
@@ -711,7 +707,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -723,17 +719,21 @@ main.o: ../tower_defense/main.cpp /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../tower_defense/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../tower_defense/Enemy.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QString \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qstring.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../tower_defense/main.cpp
 
 Tower.o: ../tower_defense/Tower.cpp ../tower_defense/Tower.h \
@@ -741,13 +741,13 @@ Tower.o: ../tower_defense/Tower.cpp ../tower_defense/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../tower_defense/Enemy.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QVector \
@@ -755,9 +755,7 @@ Tower.o: ../tower_defense/Tower.cpp ../tower_defense/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QPolygonF \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpolygon.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QTimer \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
-		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
-		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Tower.o ../tower_defense/Tower.cpp
 
 Game.o: ../tower_defense/Game.cpp ../tower_defense/Game.h \
@@ -766,20 +764,22 @@ Game.o: ../tower_defense/Game.cpp ../tower_defense/Game.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../tower_defense/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
 		../tower_defense/Enemy.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
-		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QList \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QPointF \
-		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qpoint.h \
+		../tower_defense/Bullet.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../tower_defense/Bullet.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QtMath \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qmath.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
@@ -828,6 +828,8 @@ Enemy.o: ../tower_defense/Enemy.cpp ../tower_defense/Enemy.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		../tower_defense/Bullet.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/qpixmap.h \

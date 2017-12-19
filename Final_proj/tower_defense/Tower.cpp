@@ -5,7 +5,6 @@
 #include <QPointF>
 #include <QPolygonF>
 #include <QTimer>
-#include <QMessageBox>
 
 Tower::Tower(QGraphicsItem* parent){
     setPixmap(QPixmap(":/images/tower.png"));
@@ -34,11 +33,6 @@ Tower::Tower(QGraphicsItem* parent){
     QTimer* check_timer = new QTimer(this);
     connect(check_timer, SIGNAL(timeout()), this, SLOT(check_if_hit()));
     check_timer->start(20);
-}
-
-
-void Tower::rotate(const QPointF& mouse){
-    return;
 }
 
 void Tower::check_if_hit(){

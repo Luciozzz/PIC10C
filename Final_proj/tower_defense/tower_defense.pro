@@ -36,8 +36,7 @@ HEADERS += \
     Bullet.h \
     Enemy.h
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 RESOURCES += \
     res.qrc
