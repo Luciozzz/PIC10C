@@ -12,7 +12,7 @@ All assignments and projects are located in this folder.
 
 ## Final Project Description
 
-__Tower Defense__
+__Tower Defense Pro__
 
 This is a tower defense game. Rather than normal tower defense games, this tower is able to move freely according to the user input. 
 
