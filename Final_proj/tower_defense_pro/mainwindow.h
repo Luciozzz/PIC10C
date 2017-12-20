@@ -31,6 +31,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Game* G;
+    QPushButton* ingameExit;
 };
 
 #endif // MAINWINDOW_H

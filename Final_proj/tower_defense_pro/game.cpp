@@ -13,7 +13,8 @@
 #include "Bullet.h"
 #include "Enemy.h"
 
-Game::Game(int level){
+Game::Game(int level)
+{
     //create the game scene:
     scene = new QGraphicsScene(this);
     scene->setSceneRect(0,0,800,800);
@@ -56,10 +57,10 @@ Game::Game(int level){
         enemy_list[i]->setSpeed(speed_list[i]);
         scene->addItem(enemy_list[i]);
     }
-
 }
 
-void Game::mousePressEvent(QMouseEvent *event){
+void Game::mousePressEvent(QMouseEvent *event)
+{
     //create the bullet
     Bullet* bullet = new Bullet();
 
@@ -74,7 +75,8 @@ void Game::mousePressEvent(QMouseEvent *event){
     scene->addItem(bullet);
 }
 
-void Game::keyPressEvent(QKeyEvent *key){
+void Game::keyPressEvent(QKeyEvent *key)
+{
     if(key->key() == Qt::Key_W){
         center->setY(center->y()-20);
         t->setPos(center->x(), center->y());
@@ -89,3 +91,14 @@ void Game::keyPressEvent(QKeyEvent *key){
         t->setPos(center->x(), center->y());
     }
 }
+
+QPushButton *Game::get_win() const
+{
+    return win;
+}
+
+QPushButton *Game::get_lose() const
+{
+    return lose;
+}
+

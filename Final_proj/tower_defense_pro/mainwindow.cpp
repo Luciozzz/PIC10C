@@ -1,3 +1,5 @@
+#include <QTimer>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "game.h"
@@ -34,6 +36,7 @@ void MainWindow::hard_game()
     G->show();
     this->hide();
 }
+
 
 void MainWindow::on_pushButton_clicked()
 {

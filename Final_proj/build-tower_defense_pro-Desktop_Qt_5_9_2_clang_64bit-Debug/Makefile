@@ -677,6 +677,8 @@ moc_mainwindow.cpp: /Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Head
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		../tower_defense_pro/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
@@ -757,6 +759,8 @@ main.o: ../tower_defense_pro/main.cpp ../tower_defense_pro/mainwindow.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		../tower_defense_pro/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
@@ -771,7 +775,9 @@ main.o: ../tower_defense_pro/main.cpp ../tower_defense_pro/mainwindow.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../tower_defense_pro/main.cpp
 
-mainwindow.o: ../tower_defense_pro/mainwindow.cpp ../tower_defense_pro/mainwindow.h \
+mainwindow.o: ../tower_defense_pro/mainwindow.cpp /Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QTimer \
+		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../tower_defense_pro/mainwindow.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
@@ -784,6 +790,8 @@ mainwindow.o: ../tower_defense_pro/mainwindow.cpp ../tower_defense_pro/mainwindo
 		/Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/QVector \
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qvector.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		../tower_defense_pro/Tower.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
@@ -808,7 +816,9 @@ enemy.o: ../tower_defense_pro/enemy.cpp /Applications/Qt/5.9.2/clang_64/lib/QtGu
 		/Applications/Qt/5.9.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsPolygonItem \
+		../tower_defense_pro/bullet.h \
+		/Applications/Qt/5.9.2/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o enemy.o ../tower_defense_pro/enemy.cpp
 
 tower.o: ../tower_defense_pro/tower.cpp /Applications/Qt/5.9.2/clang_64/lib/QtGui.framework/Headers/QPixmap \
